@@ -29,7 +29,6 @@ from .node_controllers import (
 from .core_controllers import (
     ToggleController,
     ActionController,
-    EraserPresetController,
     ToolController,
     UndoController)
 
@@ -49,7 +48,6 @@ __all__ = [
     "ToggleController",
     "PresetController",
     "ActionController",
-    "EraserPresetController",
     "TimeController",
     "ToolController",
     "UndoController",

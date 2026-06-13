@@ -581,14 +581,6 @@ class Action(EnumGroup):
             print(f"Called non-existing action: {self.value}")
 
     @property
-    def is_checked(self) -> bool:
-        """Return whether this action is checked."""
-        try:
-            return Api.instance().action(self.value).isChecked()
-        except AttributeError:
-            return False
-
-    @property
     def icon(self) -> QIcon:
         """Return the icon of this action."""
         try:

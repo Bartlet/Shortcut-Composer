@@ -79,36 +79,6 @@ class ActionController(Controller[Action]):
         return value.pretty_name
 
 
-class EraserPresetController(Controller[bool]):
-    """
-    Gives access to Krita's dedicated eraser preset switch.
-
-    - Operates on `bool`
-    - Setting `True` selects Krita's eraser preset
-    - Setting `False` selects Krita's brush preset
-    - Defaults to `False`
-    """
-
-    TYPE = bool
-    REQUIRES_TEXT_SETTINGS = False
-    DEFAULT_VALUE = False
-
-    @staticmethod
-    def get_value() -> bool:
-        """Return whether Krita's eraser preset is selected."""
-        try:
-            return Action.ERASER_PRESET.is_checked
-        except AttributeError:
-            return False
-
-    @staticmethod
-    def set_value(value: bool) -> None:
-        """Select Krita's eraser preset or brush preset."""
-        action = Action.ERASER_SELECT_PRESET if value \
-            else Action.BRUSH_SELECT_PRESET
-        action.activate()
-
-
 @dataclass
 class ToggleController(Controller[bool]):
     """

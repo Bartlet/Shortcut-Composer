@@ -12,8 +12,10 @@ will not be visible in `keyboard shortcuts` menu in krita settings.
 import templates
 
 from PyQt.QtGui import QColor
+from krita import Krita as Api
 
 from api_krita.enums import Action, Tool, Toggle, BlendingMode
+from core_components import Controller
 from core_components import instructions, controllers
 from input_adapter import ComplexActionInterface
 from data_components import (
@@ -24,6 +26,30 @@ from data_components import (
     Slider,
     Range,
     Group)
+
+
+class _EraserPresetController(Controller[bool]):
+    """Controller for Krita's selected brush/eraser preset pair."""
+
+    TYPE = bool
+    DEFAULT_VALUE = False
+
+    @staticmethod
+    def get_value() -> bool:
+        """Return whether Krita's eraser preset action is active."""
+        try:
+            return Api.instance().action(Action.ERASER_PRESET.value).isChecked()
+        except AttributeError:
+            return False
+
+    @staticmethod
+    def set_value(value: bool) -> None:
+        """Select Krita's eraser preset or brush preset."""
+        if value:
+            Action.ERASER_SELECT_PRESET.activate()
+        else:
+            Action.BRUSH_SELECT_PRESET.activate()
+
 
 INFINITY = float("inf")
 
@@ -54,7 +80,7 @@ def create_actions() -> list[ComplexActionInterface]: return [
     # Short press toggles; long press returns to brush preset on release.
     templates.TemporaryKey(
         name="Temporary eraser preset",
-        controller=controllers.EraserPresetController(),
+        controller=_EraserPresetController(),
         high_value=True,
         instructions=[
             instructions.SetBrushOnNonPaintable(),
