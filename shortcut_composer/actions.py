@@ -50,6 +50,18 @@ def create_actions() -> list[ComplexActionInterface]: return [
         ],
     ),
 
+    # Switch to Krita's selected eraser preset while the key is held.
+    # On release, switch back to Krita's selected brush preset.
+    templates.RawInstructions(
+        name="Temporary eraser preset",
+        instructions=[
+            instructions.SetBrushOnNonPaintable(),
+            instructions.EnsureOff(Toggle.PRESERVE_ALPHA),
+            instructions.ActivateOnPress(Action.ERASER_SELECT_PRESET),
+            instructions.ActivateOnRelease(Action.BRUSH_SELECT_PRESET),
+        ],
+    ),
+
     # Switch the preserve alpha toggle ON and OFF
     # Set tool to FREEHAND BRUSH if current tool does not allow to paint
     # Ensure the eraser toggle is OFF
