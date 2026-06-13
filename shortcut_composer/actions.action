@@ -19,6 +19,11 @@
         <icon>draw-eraser</icon>
         </Action>
 
+        <Action name="Temporary eraser preset">
+        <activationFlags>1</activationFlags>
+        <icon>draw-eraser</icon>
+        </Action>
+
         <Action name="Temporary preserve alpha">
         <activationFlags>1</activationFlags>
         <icon>bar-transparency-unlocked</icon>

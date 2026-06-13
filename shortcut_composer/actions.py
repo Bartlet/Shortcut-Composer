@@ -50,6 +50,18 @@ def create_actions() -> list[ComplexActionInterface]: return [
         ],
     ),
 
+    # Switch between Krita's selected brush and eraser presets.
+    # Short press toggles; long press returns to brush preset on release.
+    templates.TemporaryKey(
+        name="Temporary eraser preset",
+        controller=controllers.EraserPresetController(),
+        high_value=True,
+        instructions=[
+            instructions.SetBrushOnNonPaintable(),
+            instructions.EnsureOff(Toggle.PRESERVE_ALPHA),
+        ],
+    ),
+
     # Switch the preserve alpha toggle ON and OFF
     # Set tool to FREEHAND BRUSH if current tool does not allow to paint
     # Ensure the eraser toggle is OFF
