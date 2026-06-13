@@ -11,6 +11,7 @@ press, release, or in a loop while the key is pressed.
 from .layer_hide import ToggleLayerVisibility, ToggleVisibilityAbove
 from .set_brush_strategy import SetBrush, SetBrushOnNonPaintable
 from .undo import UndoOnPress
+from .actions import ActivateOnPress, ActivateOnRelease
 from .togglers import (
     TemporaryOff,
     TemporaryOn,
@@ -26,4 +27,6 @@ __all__ = [
     'UndoOnPress',
     'EnsureOff',
     'EnsureOn',
-    'SetBrush']
+    'SetBrush',
+    'ActivateOnPress',
+    'ActivateOnRelease']
